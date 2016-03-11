@@ -56,36 +56,45 @@ public class Polynom {
 		OpWith2Terms obj = new OpWith2Terms();
 		Polynom polynomial = new Polynom(0, 0);
 		String[] coef = s.split("[xX]\\^(-?\\d+\\b)");
-		for (String part : coef) {
-			int nr = 0;
-			if (part.equals(""))
-				nr = 1;
-			else if (part.equals("-"))
-				nr = -1;
+		boolean ok = false;
+		for (String part : coef)
+			if (part.isEmpty())
+				;
 			else
-				nr = Integer.parseInt(part);
-			n++;
-			coefS[n] = nr;
-		}
-		int nrOfCoef = n;
-		n = 0;
-		// for degree
-		String[] degree = s.split("(-|\\+)");
-		for (String part : degree) {
-			if (part.contains("^")) {
-				part = part.substring(part.lastIndexOf("^") + 1);
-				int nr = Integer.parseInt(part);
+				ok = true;
+		if (ok) {
+			for (String part : coef) {
+				int nr = 0;
+				if (part.equals(""))
+					nr = 1;
+				else if (part.equals("-"))
+					nr = -1;
+				else
+					nr = Integer.parseInt(part);
 				n++;
-				degS[n] = nr;
+				coefS[n] = nr;
 			}
-		}
-		for (int i = 1; i <= nrOfCoef; i++) {
-			int a = coefS[i];
-			int b = degS[i];
-			Polynom aux = new Polynom(a, b);
-			polynomial = obj.add(polynomial, aux);
-		}
-		return polynomial;
+			int nrOfCoef = n;
+			n = 0;
+			// for degree
+			String[] degree = s.split("(-|\\+)");
+			for (String part : degree) {
+				if (part.contains("^")) {
+					part = part.substring(part.lastIndexOf("^") + 1);
+					int nr = Integer.parseInt(part);
+					n++;
+					degS[n] = nr;
+				}
+			}
+			for (int i = 1; i <= nrOfCoef; i++) {
+				int a = coefS[i];
+				int b = degS[i];
+				Polynom aux = new Polynom(a, b);
+				polynomial = obj.add(polynomial, aux);
+			}
+			return polynomial;
+		} else
+			return polynomial = new Polynom(0, 0);
 	}
 
 	/*
@@ -102,12 +111,23 @@ public class Polynom {
 			if (coefficients[1] == 1)
 				if (coefficients[0] > 0)
 					return "x " + "+" + df.format(coefficients[0]);
+				else if (coefficients[0] == 0)
+					return "x";
 				else
-					return "x " + df.format(coefficients[0]);
+					return "x " + "-" + df.format(-coefficients[0]);
 			else if (coefficients[1] == -1)
-				return "-x " + df.format(coefficients[0]);
+				if (coefficients[0] > 0)
+					return "-x " + "+" + df.format(coefficients[0]);
+				else if (coefficients[0] == 0)
+					return "-x";
+				else
+					return "x " + "-" + df.format(-coefficients[0]);
+			else if (coefficients[0] > 0)
+				return df.format(coefficients[1]) + "x " + "+"+df.format(coefficients[0]);
+			else if (coefficients[0] == 0)
+				return df.format(coefficients[1]) + "x";
 			else
-				return df.format(coefficients[1]) + "x " + df.format(coefficients[0]);
+				return df.format(coefficients[1]) + "x " +"-"+ df.format(-coefficients[0]);
 		String poly = "";
 		if (coefficients[degree] == 1)
 			poly = "x^" + degree;
@@ -121,15 +141,11 @@ public class Polynom {
 			else if (coefficients[i] > 0)
 				if (coefficients[i] == 1 && i != 0)
 					poly = poly + " + ";
-				else if (coefficients[0] == 1)
-					poly = poly + " +1";
 				else
 					poly = poly + " + " + df.format(coefficients[i]);
 			else if (coefficients[i] < 0)
 				if (coefficients[i] == -1 && i != 0)
 					poly = poly + " - ";
-				else if (coefficients[0] == -1)
-					poly = poly + " -1";
 				else
 					poly = poly + " - " + df.format(-coefficients[i]);
 			if (i == 1)

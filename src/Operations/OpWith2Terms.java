@@ -3,7 +3,11 @@ package Operations;
 import Polynomial.Polynom;
 
 public class OpWith2Terms implements TwoTermOp {
-	/* Addition of two polynomials * TO DO ! */
+	/*
+	 * Addition of two polynomials. This method performs the additon of two
+	 * polynomials. It adds the coefficient for a specific exponent into an
+	 * object c of type Polynom.
+	 */
 	@Override
 	public Polynom add(Polynom p, Polynom q) {
 		Polynom c = new Polynom(0, Math.max(p.degree, q.degree));
@@ -15,7 +19,14 @@ public class OpWith2Terms implements TwoTermOp {
 		return c;
 	}
 
-	/* Substraction of two polynomials * TO DO ! */
+	/*
+	 * Substraction of two polynomials. This method performs the substraction of
+	 * two polynomials. Firstly it "copies" the first polynomial to another
+	 * polynom object which is going to be returned. After the object that is to
+	 * be returned has the same values with the first polynomial it substracts
+	 * the second polynomial given as argument from the polynomial that is to be
+	 * returned
+	 */
 	@Override
 	public Polynom sub(Polynom p, Polynom q) {
 		Polynom c = new Polynom(0, Math.max(p.degree, q.degree));
@@ -27,7 +38,24 @@ public class OpWith2Terms implements TwoTermOp {
 		return c;
 	}
 
-	/* Division of two polynomials * TO DO ! */
+	/*
+	 * Division of two polynomials. This method performs the division of two
+	 * polynomials. In case the the 2nd polynomial is the zero polynomial it
+	 * will thrown a division by zero exception. It willl also throw an
+	 * exception if the degree of the second polynomial greater than the degree
+	 * of the first polynomial. The algorithm works as follows: it takes the
+	 * monomial with the highest exponent of the first polynom and it divides
+	 * it's coefficient to the coefficient of the highest monomial. The result
+	 * is the coefficient of the monomial with the exponent given by
+	 * substracting the exponent of the second monomial from the exponent of the
+	 * first monomial. This step is perfomed in a while loop until the degree of
+	 * the first polynomial is lower than the degree of the second polynomial.
+	 * each time a division of two monomials is performed the product of the
+	 * resulted coefficient with each coefficient of the second polynomial is
+	 * substracted from the first polynomial , this way the division is perfomed
+	 * until a division can no longer be performed. The method takes 2 arguments
+	 * of type Polynom and returns a Polynom object.
+	 */
 	@Override
 	public Polynom div(Polynom p, Polynom q) {
 		if ((q.degree == 0) && (q.coefficients[0] == 0))
@@ -56,7 +84,14 @@ public class OpWith2Terms implements TwoTermOp {
 		return quotient;
 	}
 
-	/* Multiplication of two polynomials * TO DO ! */
+	/*
+	 * Multiplication of two polynomials.It's a method that takes as input
+	 * arguments two objects of type Polynom and returns a Polynom. The
+	 * algorithm is composed of a nested for statement which multiplies each
+	 * coefficient of polynomial 1 with each coefficient of the second
+	 * polynomial. If the indexes(exponents) match the coefficients for that
+	 * specific exponent are added together
+	 */
 	@Override
 	public Polynom mul(Polynom p, Polynom q) {
 		Polynom c = new Polynom(0, p.degree + q.degree);
@@ -67,7 +102,12 @@ public class OpWith2Terms implements TwoTermOp {
 		return c;
 	}
 
-	/* Check if the two polynomials are identical * TO DO ! */
+	/*
+	 * Check if the two polynomials are identical. This method takes as input
+	 * arguments two objects Polynom and returns true if the two objects hold
+	 * the same values of coefficients for the exponents. It returns false is
+	 * they are not the same .
+	 */
 	@Override
 	public boolean equality(Polynom p, Polynom q) {
 		if (p.degree != q.degree)

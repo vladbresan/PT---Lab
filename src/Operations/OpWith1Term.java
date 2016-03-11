@@ -27,7 +27,14 @@ public class OpWith1Term implements OneTermOp {
 		return deriv;
 	}
 
-	/* Antiderivative * TO DO ! */
+	/*
+	 * Antiderivative method is the exact oposit of the differentiation. It
+	 * takes as an argument an object Polynom and returns an object Polynom
+	 * named integral. the for loop starts ath the highest index which
+	 * represents the highest degree and it gives the value of the coefficient
+	 * by the following formula : coefficient i+1(power of x, x^i+1) gets the
+	 * value of the result given by the coefficient i divided by i+1
+	 */
 	@Override
 	public Polynom integr(Polynom p) {
 		Polynom integral = new Polynom(0, p.degree + 1);
@@ -37,7 +44,12 @@ public class OpWith1Term implements OneTermOp {
 		return integral;
 	}
 
-	/* Value of polynomial at point x * TO DO ! */
+	/*
+	 * Value of polynomial at point x method takes as arguments an object
+	 * Polynom and a double value x. It returns a double named val which
+	 * represent the result of the polynomial by replacing the X(variable x of
+	 * polynomial) with the given value of x !
+	 */
 	@Override
 	public double evaluate(Polynom p, double x) {
 		double val = 0;
@@ -49,7 +61,14 @@ public class OpWith1Term implements OneTermOp {
 		return val;
 	}
 
-	/* Definite integral from a to b * TO DO ! */
+	/*
+	 * Definite integral from a to b . This method returns a double named val
+	 * and it takes as arguments an object Polynom and two boundaries a and
+	 * b(double) It computes the integration and then evaluates the integral in
+	 * point a and b the result is given by substracting the result given by
+	 * evaluating the integral in a from the result given by evaluating the
+	 * integral in point a
+	 */
 	@Override
 	public double integrAtoB(Polynom p, double a, double b) {
 		Polynom integral = new Polynom(0, p.degree + 1);

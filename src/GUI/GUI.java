@@ -18,7 +18,10 @@ import Polynomial.Polynom;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-/*Graphic User Interface  * TO DO document briefly*/
+/*Graphic User Interface . This class creates the frame ,text fields,
+ *  panels, the buttons , labels and the action listeners for each button. 
+ *  In each action listener methods from the other classes are called in
+ *  order to perform the specific action that button is meant for*/
 public class GUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
