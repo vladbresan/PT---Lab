@@ -1,3 +1,0 @@
-# Polynomials
-Polynomials homework
-
